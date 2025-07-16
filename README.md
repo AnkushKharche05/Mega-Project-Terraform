@@ -1,6 +1,34 @@
 # RBAC
  
- RBAC YAML configuration for the `jenkins` ServiceAccount, Role, RoleBinding, ClusterRole, and ClusterRoleBinding to ensure the ServiceAccount can create all the resources in your YAML file, including dynamic provisioning with StorageClasses and PersistentVolumes.
+A dedicated jenkins ServiceAccount is created in the jenkins namespace to authenticate Jenkins within the cluster securely.
+
+🔧 Role & RoleBinding
+A Role is defined to grant the jenkins ServiceAccount permissions to manage namespace-scoped resources such as:
+
+Pods
+
+Deployments
+
+Services
+
+PersistentVolumeClaims (PVCs)
+
+ConfigMaps
+
+Secrets
+
+A corresponding RoleBinding assigns this Role to the ServiceAccount within the jenkins namespace.
+
+🌐 ClusterRole & ClusterRoleBinding
+A ClusterRole provides cluster-wide access to resources required for dynamic provisioning and system-wide configurations, including:
+
+PersistentVolumes (PVs)
+
+StorageClasses
+
+Namespaces
+
+A ClusterRoleBinding links this ClusterRole to the jenkins ServiceAccount, enabling it to operate at the cluster level where necessary.
 
 ### **1. ServiceAccount**
 ```yaml
